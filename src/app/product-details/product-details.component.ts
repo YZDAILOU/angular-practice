@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product, products } from '../products';
 import { CartService } from '../cart.service';
+import { Store } from '@ngrx/store';
+import { addProduct } from '../ngrx-store/cart-actions';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +22,11 @@ export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
 
   // injecting dependency/service in order to use them.
-  constructor(private route: ActivatedRoute, private cartSevice: CartService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private cartSevice: CartService,
+    private store: Store
+  ) {}
 
   //
   ngOnInit() {
@@ -42,6 +48,15 @@ export class ProductDetailsComponent implements OnInit {
   // will be triggered by a button click
   addToCart(product: Product) {
     this.cartSevice.addToCart(product);
+    window.alert('Your product have been added into the cart');
+  }
+
+  //using ngrx store================
+  //testing ngrx
+  addItemToCart(product: Product) {
+    //check the price
+    //console.warn(product.price);
+    this.store.dispatch(addProduct(product));
     window.alert('Your product have been added into the cart');
   }
 }

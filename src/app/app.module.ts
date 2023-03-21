@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -12,12 +13,20 @@ import { CartComponent } from './cart/cart.component';
 //adding the HttpClient module in order to use it
 import { HttpClientModule } from '@angular/common/http';
 import { ShippingComponent } from './shipping/shipping.component';
+import {
+  cartReducer,
+  metaReducerLocalStorage,
+} from './ngrx-store/cart-reducer';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(
+      { cartEntries: cartReducer },
+      { metaReducers: [metaReducerLocalStorage] }
+    ),
     RouterModule.forRoot([
       //here sets the link to redirect to different components.
       { path: '', component: ProductListComponent },

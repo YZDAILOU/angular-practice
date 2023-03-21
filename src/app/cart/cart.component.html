@@ -1,12 +1,20 @@
 <h3>Cart</h3>
 
+<!-- display the product count and price -->
+<!-- "async" pipe is use to subscribe to the observable -->
+<div class="counter">Counter: {{ countProducts$ | async }}</div>
+<div class="counter">
+  Total Price: {{ totalPrice$ | async | number: '1.2-2' }}
+</div>
+
 <p>
   <a routerLink="/shipping">Shipping Price</a>
 </p>
 
-<div class="cart-item" *ngFor="let item of items">
-  <span>{{ item.name }}</span>
-  <span>{{ item.price | currency }}</span>
+<div class="cart-item" *ngFor="let item of cartEntries$ | async">
+  <span>{{ item.product.name }}</span>
+  <span>${{ item.product.price }}</span>
+  <span>{{ item.count }}</span>
 </div>
 
 <!-- tis purchase form will trigger the onClick() method -->

@@ -1,0 +1,35 @@
+<h2>Products</h2>
+
+<!-- the ngFor will repeatedly generate a <div> for each item in the list -->
+<div *ngFor="let product of products">
+  <h3>
+    <!-- property binding -->
+    <a
+      [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]"
+    >
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <p>${{ product.price }}</p>
+
+  <!-- adding the product description and using ngIf to check if there is anything in the description before adding it in -->
+  <p *ngIf="product.description">
+    {{ product.description }}
+  </p>
+
+  <!-- adding a click event that will trigger the share function once the button is pressed -->
+  <button type="button" (click)="share()">Share</button>
+
+  <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()"
+  ></app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

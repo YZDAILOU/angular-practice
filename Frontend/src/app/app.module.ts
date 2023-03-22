@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { routing } from './app.route';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -27,13 +28,8 @@ import {
       { cartEntries: cartReducer },
       { metaReducers: [metaReducerLocalStorage] }
     ),
-    RouterModule.forRoot([
-      //here sets the link to redirect to different components.
-      { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'shipping', component: ShippingComponent },
-    ]),
+    //this includes all the route available in the application.
+    routing,
   ],
   declarations: [
     AppComponent,

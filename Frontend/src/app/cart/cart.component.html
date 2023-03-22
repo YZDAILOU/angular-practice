@@ -15,6 +15,12 @@
   <span>{{ item.product.name }}</span>
   <span>${{ item.product.price }}</span>
   <span>{{ item.count }}</span>
+  <span>
+    <button type="button" (click)="more(item)">Add</button>
+  </span>
+  <span>
+    <button type="button" (click)="less(item)">Remove</button>
+  </span>
 </div>
 
 <!-- tis purchase form will trigger the onClick() method -->
